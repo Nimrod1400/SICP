@@ -26,12 +26,19 @@
   (start-prime-test (runtime)))
 
 (define (search-for-primes start) 
-  (define (iter a count)
+  (define (iter a count t)
     (cond
-      ((even? a) (iter (+ a 1) count))
+      ((even? a) (iter (+ a 1) count t))
       ((< count 3)
        (if (timed-prime? a)
-	 (iter (+ a 2) (+ count 1))
-	 (iter (+ a 2) count)))))
-  (iter start 0))
+	 (iter (+ a 2) (+ count 1) t)
+	 (iter (+ a 2) count t)))
+      (else (show-time (- (runtime) t)))))
+
+  (define (show-time time)
+    (newline)
+    (display "total time: ")
+    (display time))
+
+  (iter start 0 (runtime)))
 

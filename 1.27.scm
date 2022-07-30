@@ -13,12 +13,12 @@
 
 
 (define (fermat? n)
-  (define (iter a so-long)
+  (define (iter a)
     (cond
       ((< a n) 
          (if (fermat-test? a n)
-	   (iter (+ a 1) #t)
+	   (iter (+ a 1))
 	   #f))
-      (else so-long)))
-  (iter 1 #f))
+      (else #t)))
+  (iter 1))
 

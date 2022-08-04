@@ -24,6 +24,8 @@
 
 (define (inc a) (+ a 1))
 
+(define (identity x) x)
+
 (define (filtered-accumulate combiner null-value term a next b filtered?)
   (define (iter a result)
     (if (> a b)
@@ -37,5 +39,13 @@
 (define (filtered-sum term a next b filtered?)
   (filtered-accumulate + 0 term a next b filtered?))
 
+(define (filtered-product term a next b filtered?)
+  (filtered-accumulate * 1 term a next b filtered?))
+
 (define (squares-of-primes a b)
   (filtered-sum square a inc b prime?))
+
+(define (coprime-product n)
+  (define (coprime? a)
+    (= (gcd n a) 1))
+  (filtered-product identity 1 inc n coprime?))

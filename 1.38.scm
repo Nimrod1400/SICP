@@ -1,0 +1,20 @@
+(define (cont-frac n d k)
+  (define (iter result counter)
+    (if (= counter 0)
+      result
+      (iter (/ (n counter) (+ (d counter) result)) 
+            (- counter 1))))
+  (iter (/ (n k) (d k)) (- k 1)))
+
+(define (e k)
+  (+ (cont-frac
+       (lambda (i) 1.0)
+       (lambda (i)
+	 (let ((rem-i (remainder (- i 5) 3)))
+	       (cond ((= i 2) 2)
+		     ((and (or (> i 5) (= i 5)) 
+			   (= rem-i 0)) 
+		      (+ 4 (/ (- i 5) 3)))
+		     (else 1))))
+       k) 
+     2))

@@ -1,0 +1,13 @@
+(define (iterative-improve improve good-enough?) 
+  (define (iter guess)
+    (let ((next (improve guess)))
+      (if (good-enough? guess next)
+	next
+	(iter next))))
+  iter)
+(define (sqrt-iter x)
+  (define (good-enough? v1 v2)
+    (< (abs (- v1 v2)) 0.0001))
+  (define (improve guess)
+    (/ (+ guess (/ x guess)) 2))
+  ((iterative-improve improve good-enough?) 1.0))

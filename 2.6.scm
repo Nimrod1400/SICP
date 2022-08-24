@@ -2,7 +2,6 @@
 (define (add-1 n) 
   (lambda (f)
     (lambda (x) (f ((n f) x)))))
-; говорят, что в СИКПЕ не нужен матан.
 ; пусть l - это лямбда
 ; zero = lf.lx. x
 ; add-1 = ln.lf.lx. f (n f x)
